@@ -13,17 +13,23 @@ function getRandomNumber( min, max){
     return Math.floor(Math.random()  * (max - min +1) + min) ;
 }
 function getPromptFiveTimes(array){
-    for(let i = 0; i < 5; i++){
-        const userNumb=parseInt(prompt('inserisci i numeri che ricordi'))
-        array.push(userNumb)
-    }
+    let userNumb;
+    //while(!userNumb){
+        for(let i = 0; i < 5; i++){
+            userNumb=parseInt(prompt('inserisci i numeri che ricordi'))
+            if(userNumb !== array[i]){
+                array.push(userNumb)
+                
+            }
+        }
+    //}
     return array;
 }
 
 //Esecuzione
 const numbers= [];
 for(let i = 0; i < 5; i++){
-    numbers.push(getRandomNumber(1, 50))
+    numbers.push(getRandomNumber(1, 50));
 }
 
 //*Mostro i numeri all'utente
@@ -32,6 +38,20 @@ alert(numbers);
 
 //*Chiedo all'utente di scrivere 5 numeri e li inserisco in un'array
 const list=[];
-setTimeout(function (){getPromptFiveTimes(list)}, 5000);
 
+setTimeout( ()=>{getPromptFiveTimes(list)}, 5000);
+
+//*verifico il risultato
+let message='';
+for(let i = 0; i < 5; i++){
+    if(numbers[i] === list[i]){
+        message='hai vinto'
+    }else{
+        message='hai perso'
+    }
+
+}
+console.log(message);
+
+console.log(numbers);
 console.log(list);
