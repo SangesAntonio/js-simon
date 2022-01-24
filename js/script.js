@@ -12,19 +12,40 @@ controllare che l'utente non inserisca 2 volte lo stesso numero*/
 function getRandomNumber( min, max){
     return Math.floor(Math.random()  * (max - min +1) + min) ;
 }
-function getPromptFiveTimes(array){
+function getResult(array,secondArray){
     let userNumb;
-    //while(!userNumb){
+    while(!userNumb){
         for(let i = 0; i < 5; i++){
             userNumb=parseInt(prompt('inserisci i numeri che ricordi'))
             if(userNumb !== array[i]){
                 array.push(userNumb)
-                
             }
         }
-    //}
-    return array;
+    }
+
+//*verifico il risultato
+    let message=' '
+    let win=0;
+    for(let i = 0; i < array.length; i++){
+        if(secondArray[i] === array[i]){
+            win++;
+            message=(`Complimenti hai indovinato ${win} numeri`);
+        }else{
+            message=(`Mi dispiace hai indovinato ${win} numeri`);
+
+        }
+
+    }
+    alert(message)
+    console.log(message);
+
+    console.log(secondArray);
+    console.log(array);
+
+    return array,win;
 }
+
+
 
 //Esecuzione
 const numbers= [];
@@ -39,19 +60,6 @@ alert(numbers);
 //*Chiedo all'utente di scrivere 5 numeri e li inserisco in un'array
 const list=[];
 
-setTimeout( ()=>{getPromptFiveTimes(list)}, 5000);
+setTimeout( ()=>{getResult(list,numbers)}, 5000);
 
-//*verifico il risultato
-let message='';
-for(let i = 0; i < 5; i++){
-    if(numbers[i] === list[i]){
-        message='hai vinto'
-    }else{
-        message='hai perso'
-    }
 
-}
-console.log(message);
-
-console.log(numbers);
-console.log(list);
