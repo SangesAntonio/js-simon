@@ -9,3 +9,14 @@ controllare che l'utente non inserisca 2 volte lo stesso numero*/
 
 // 1 genero 5 numeri random
 //?funzioni
+function getRandomNumber( min, max){
+    return Math.floor(Math.random()  * (max - min +1) + min) ;
+}
+
+const numbers= [];
+for(let i = 0; i < 5; i++){
+    
+    numbers.push(getRandomNumber(1, 50))
+}
+alert(numbers)
+console.log(numbers);
