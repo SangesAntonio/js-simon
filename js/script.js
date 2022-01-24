@@ -8,15 +8,30 @@ controllare che i numeri casuali siano diversi tra loro
 controllare che l'utente non inserisca 2 volte lo stesso numero*/
 
 // 1 genero 5 numeri random
-//?funzioni
+//!funzioni
 function getRandomNumber( min, max){
     return Math.floor(Math.random()  * (max - min +1) + min) ;
 }
+function getPromptFiveTimes(array){
+    for(let i = 0; i < 5; i++){
+        const userNumb=parseInt(prompt('inserisci i numeri che ricordi'))
+        array.push(userNumb)
+    }
+    return array;
+}
 
+//Esecuzione
 const numbers= [];
 for(let i = 0; i < 5; i++){
-    
     numbers.push(getRandomNumber(1, 50))
 }
-alert(numbers)
-console.log(numbers);
+
+//*Mostro i numeri all'utente
+alert(numbers);
+
+
+//*Chiedo all'utente di scrivere 5 numeri e li inserisco in un'array
+const list=[];
+setTimeout(function (){getPromptFiveTimes(list)}, 5000);
+
+console.log(list);
