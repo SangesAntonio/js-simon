@@ -9,57 +9,92 @@ controllare che l'utente non inserisca 2 volte lo stesso numero*/
 
 // 1 genero 5 numeri random
 //!funzioni
+//creo numeri random
 function getRandomNumber( min, max){
     return Math.floor(Math.random()  * (max - min +1) + min) ;
 }
-function getResult(array,secondArray){
-    let userNumb;
-    while(!userNumb){
-        for(let i = 0; i < 5; i++){
-            userNumb=parseInt(prompt('inserisci i numeri che ricordi'))
-            if(userNumb !== array[i]){
-                array.push(userNumb)
-            }
+
+//mostro all'utente 5 numeri random
+function getAlert(min, max,total){
+    const numbers=[]
+    while(numbers.length < total){
+        let numb;
+        numb=getRandomNumber(min, max)
+        if(!numbers.includes(numb)){
+            numbers.push(numb);
         }
+        
     }
-
-//*verifico il risultato
-    let message=' '
-    let win=0;
-    for(let i = 0; i < array.length; i++){
-        if(secondArray[i] === array[i]){
-            win++;
-            message=(`Complimenti hai indovinato ${win} numeri`);
-        }else{
-            message=(`Mi dispiace hai indovinato ${win} numeri`);
-
-        }
-
-    }
-    alert(message)
-    console.log(message);
-
-    console.log(secondArray);
-    console.log(array);
-
-    return array,win;
+    return alert(numbers),numbers;
 }
 
+//chiedo all'utente 5 numeri
+function getPrompt(array){
+
+    //*l'utente sceglie 5 numeri
+    let userNumb;
+    while(!userNumb || !isNaN(userNumb)){
+
+        for(let i = 0; i < 5; i++){
+            userNumb=parseInt(prompt('inserisci i numeri che ricordi'))
+            if(userNumb !== array[i] || !isNaN(userNumb)){
+                array.push(userNumb)
+            }else{
+                userNumb=parseInt(prompt('inserisci un numero valido'))
+                
+            }
+        }
+        return array;
+    }
+}
+
+
+//gli mostro il risultato 
+function getResult(array,secondArray){
+
+    array=getPrompt(array);
+
+    //*verifico il risultato
+    let message=' '
+    
+    const winners=secondArray.filter((numb,i)=>{
+        if( array.includes(numb)){
+            return true;
+        }
+        return false;
+    })
+
+    message=(` Hai indovinato ${winners.length} numeri:${winners}`);
+    if(!winners.length){
+        message=(`Hai indovinato ${winners.length} numeri:${winners}`);
+        
+    }
+            
+            
+    console.log(message);
+    
+    console.log(secondArray);
+    console.log(array);
+    
+    alert(message)
+    return array,message;
+}
 
 
 //Esecuzione
-const numbers= [];
-for(let i = 0; i < 5; i++){
-    numbers.push(getRandomNumber(1, 50));
-}
+//*Mostro i numeri all'utente tramite alert
+const cpuNumbers=getAlert(1,100,5);
+console.log(cpuNumbers)
 
-//*Mostro i numeri all'utente
-alert(numbers);
+
+
 
 
 //*Chiedo all'utente di scrivere 5 numeri e li inserisco in un'array
 const list=[];
-
-setTimeout( ()=>{getResult(list,numbers)}, 5000);
+// dichiaro il risultato
+setTimeout( ()=>{
+    getResult(list,cpuNumbers,)
+}, 5000);
 
 
